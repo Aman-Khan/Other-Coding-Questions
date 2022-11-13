@@ -1,0 +1,19 @@
+def reverseWords(self, s: str) -> str:
+  s = s.lstrip()
+  res = ""
+  temp = ""
+  i=len(s)-1
+  flag = False
+  while(i>=0):
+      if(s[i]!=" "):
+          temp=s[i]+temp
+          flag=True
+
+      elif(s[i]==" " and flag==True):
+          res+=temp+" "
+          temp=""
+          flag=False
+      if(i==0):
+          res+=temp
+      i-=1
+  return res
