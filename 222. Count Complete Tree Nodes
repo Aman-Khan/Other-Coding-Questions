@@ -1,0 +1,16 @@
+class Solution {
+private:
+    int traverse(TreeNode* head){
+        if(head==NULL){
+            return 0;
+        }
+        // cout<<head->data<<" ";
+        int l = traverse(head->left)+1;
+        int r = traverse(head->right);
+        return r+l;
+    }
+public:
+    int countNodes(TreeNode* root) {
+        return traverse(root);
+    }
+};
