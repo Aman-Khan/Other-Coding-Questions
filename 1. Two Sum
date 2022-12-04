@@ -1,11 +1,25 @@
-    vector<int> twoSum(vector<int>& v, int target) {
-        map<int, int> m;
-        for(int i=0; i<v.size(); i++){
-            map<int, int>::iterator it = m.find(target-v[i]);
-            if(it!=m.end()){
+    //Time Optimal
+    vector<int> twoSum(vector<int>& nums, int target) {
+        map<int, int> xmap;
+        for(int i=0; i<nums.size(); i++){
+            map<int, int>::iterator it=xmap.find(target-nums[i]);
+            if(it!=xmap.end()){
                 return {i, (*it).second};
             }
-            m[v[i]]=i;
+            xmap[nums[i]]=i;
+        }
+        return {-1};
+    }
+    
+    //Space Optimal
+    vector<int> twoSum(vector<int>& nums, int target) {
+        for(int i=0; i<nums.size(); i++){
+            int complement = target-nums[i];
+            for(int j=i+1; j<nums.size(); j++){
+                if(nums[j]==complement){
+                    return {i, j};
+                }
+            }
         }
         return {-1};
     }
