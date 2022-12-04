@@ -1,0 +1,11 @@
+    vector<int> twoSum(vector<int>& v, int target) {
+        map<int, int> m;
+        for(int i=0; i<v.size(); i++){
+            map<int, int>::iterator it = m.find(target-v[i]);
+            if(it!=m.end()){
+                return {i, (*it).second};
+            }
+            m[v[i]]=i;
+        }
+        return {-1};
+    }
