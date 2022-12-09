@@ -1,0 +1,24 @@
+    void mkp(int i, string digit, string temp, string nMap[], vector<string> &ans){
+        if(i>=digit.length()){
+            ans.push_back(temp);
+            return;
+        }
+
+        int no = digit[i]-'0';
+        string value = nMap[no];
+        for(int ind=0; ind<value.length(); ind++){
+            temp.push_back(value[ind]);
+            mkp(i+1, digit, temp, nMap, ans);
+            temp.pop_back();
+        }
+    }
+    
+    vector<string> letterCombinations(string digits) {
+        vector<string> ans;
+        if(digits.length()==0) return ans;
+        int i=0;
+        string temp="";
+        string nMap[] = {"", "", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        mkp(i, digits, temp, nMap, ans);
+        return ans;
+    }
