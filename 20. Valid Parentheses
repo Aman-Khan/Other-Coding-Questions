@@ -1,0 +1,20 @@
+    bool isValid(string s) {
+        stack<char> st;
+        int i = 0;
+        while(i<s.length()){
+            if(st.empty() && (s[i]==')' || s[i]==']' || s[i]=='}')) return false;
+            if(s[i]=='(' || s[i]=='[' || s[i]=='{'){
+                st.push(s[i]);
+            }
+            else if(i>0){
+                char temp = st.top();
+                if(temp=='(' && s[i]==')') st.pop();
+                else if(temp=='[' && s[i]==']') st.pop();
+                else if(temp=='{' && s[i]=='}') st.pop();
+                else return false;
+            }
+            i++;
+        }
+        if(st.empty()) return true;
+        return false;
+    }
