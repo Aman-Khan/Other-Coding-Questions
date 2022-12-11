@@ -1,0 +1,21 @@
+//using recursion
+    int cStairs(int n){
+        if(n<=0){
+            if(n==0) return 1;
+            else return 0;
+        }
+        return cStairs(n-1)+cStairs(n-2);
+    }
+
+//using dp
+   int climbStairs(int n) {
+        if(n<=2) return n;
+        int i=0;
+        int j=1;
+        for(int p=0; p<n; p++){
+            int temp=j;
+            j=i+j;
+            i=temp;
+        }
+        return j;
+    }
