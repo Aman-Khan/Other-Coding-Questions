@@ -1,0 +1,21 @@
+    void generate(int i, string temp, vector<string> &ans, int n, int balance){
+        if(balance<0) return;
+        if(temp.size()==n){
+            if(balance==0) ans.push_back(temp);
+            return;
+        }
+
+        if(temp.length()!=n-1){
+            temp.push_back('(');
+            balance++;
+            generate(i+1, temp, ans, n, balance);
+            balance--;
+            temp.pop_back();
+        }
+        if(temp.length()!=0){
+            temp.push_back(')');
+            balance--;
+            generate(i+1, temp, ans, n, balance);
+            balance++;
+        }
+    }
