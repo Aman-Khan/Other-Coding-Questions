@@ -1,0 +1,45 @@
+//Time Complexity O(n^2)
+    int longestValidParentheses(string s) {
+        int maxLen=0;
+        int i=0; 
+        while(i<s.length()){
+        int balance=0;
+            int ni=i;
+            while(ni<s.length()){
+                if(s[ni]=='(') balance++;
+                else balance--;
+                if(balance==0) maxLen=max(maxLen, ni-i+1);
+                if(balance<0) break;
+                ni++;
+            }
+            i++;
+        }
+        return maxLen;
+    }
+ 
+//Using two stack;
+  int longestValidParentheses(string s) {
+     int maxLen=0;
+     stack<char> cStack; //to store string character
+     stack<int> indStack; //to store index of character
+     indStack.push(-1);
+     int i=0;
+     while(i<s.lenght()){
+        if(s[i]==')'){
+            if(!cStack.empty()){
+                cStack.pop();
+                indStack.pop();
+                maxLen=max(maxLen, i-indStack.top());
+              }
+            else{
+              indStack.push(i);
+            }
+        }
+        else{
+            cStack.push('(');
+            indStack.push(i);
+        }
+        i++;
+     }
+     return maxLen;
+  }
