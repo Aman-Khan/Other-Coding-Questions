@@ -1,0 +1,39 @@
+int leftMost(vector<int> nums, int target){
+        int start=0;
+        int end=nums.size()-1; 
+        int ind=-1;
+        int mid=start+(end-start)/2;
+        while(start<=end){
+            if(target<=nums[mid]){
+                if(nums[mid]==target) ind=mid;
+                end=mid-1;
+            }
+            else{
+                start=mid+1;
+            }
+            mid=start+(end-start)/2;
+        }
+        return ind;
+    }
+
+    int rightMost(vector<int> nums, int target){
+        int start=0;
+        int end=nums.size()-1;
+        int ind=-1;
+        int mid=start+(end-start)/2;
+        while(start<=end){
+            if(target>=nums[mid]){
+                if(target==nums[mid]) ind=mid;
+                start=mid+1;
+            }
+            else{
+                end=mid-1;
+            }
+            mid=start+(end-start)/2;
+        }
+        return ind;
+    }
+    
+    vector<int> searchRange(vector<int>& nums, int target) {
+        return {leftMost(nums, target), rightMost(nums, target)};
+    }
