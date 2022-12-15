@@ -1,0 +1,36 @@
+link - https://www.codingninjas.com/codestudio/problems/aggressive-cows_1082559
+
+bool isPossible(vector<int> stalls, int cows, int gap){
+    int dif=0;
+    int temp=stalls[0];
+    for(int i=1; i<stalls.size(); i++){
+        if(abs(temp-stalls[i])>=gap){
+            cows--;
+            temp=stalls[i];
+        }
+        if(cows==1) return true;
+    }
+    return false;
+}
+
+int aggressiveCows(vector<int> &stalls, int cows)
+{
+    sort(stalls.begin(), stalls.end());
+    int minDist=0;
+    int maxDist=stalls[stalls.size()-1];
+    int ans=0;
+    maxDist=maxDist-minDist;
+    int mid=minDist+(maxDist-minDist)/2;
+    while(minDist<=maxDist){
+        if(isPossible(stalls, cows, mid)){
+            ans=mid;
+            minDist=mid+1;
+        }
+        else{
+            maxDist=mid-1;
+        }
+        mid=minDist+(maxDist-minDist)/2;
+    }
+    return ans;
+    //    Write your code here.
+}
