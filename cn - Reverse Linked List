@@ -1,5 +1,6 @@
 link - https://www.codingninjas.com/codestudio/problems/reverse-linked-list_920513
 
+//iterative
 void reverse(Node*& head){
     if(head->next==NULL) return;
     Node* prev=NULL;
@@ -16,4 +17,19 @@ void reverse(Node*& head){
         }
     }
     head = curr;
+}
+
+//recursive
+void reverse(Node* prev, Node* curr, Node* forw, Node* &head){
+    if(head==NULL) return;
+    if(forw==NULL){
+        curr->next=prev;
+        head=curr;
+        return;
+    }
+    curr->next=prev;
+    prev=curr;
+    curr=forw;
+    forw=forw->next;
+    reverse(prev,curr, forw, head);
 }
