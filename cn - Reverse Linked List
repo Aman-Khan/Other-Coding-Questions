@@ -1,0 +1,19 @@
+link - https://www.codingninjas.com/codestudio/problems/reverse-linked-list_920513
+
+void reverse(Node*& head){
+    if(head->next==NULL) return;
+    Node* prev=NULL;
+    Node* curr=head;
+    Node* forw=head->next;
+    while(true){
+        curr->next = prev;
+        prev=curr;
+        curr=forw;
+        forw=forw->next;
+        if(forw==NULL){
+            curr->next=prev;
+            break;
+        }
+    }
+    head = curr;
+}
