@@ -1,0 +1,42 @@
+    bool isSafe(int x, int y, vector<string> board){
+        int xCod = x;
+        int yCod = y;
+
+        while(x>=0 && y>=0){
+            if(board[x][y]=='Q') return false;
+            x--;
+            y--;
+        }
+        x=xCod;
+        y=yCod;
+        while(y>=0){
+            if(board[x][y]=='Q') return false;
+            y--;
+        }
+        y=yCod;
+        while(x<board.size() && y>=0){
+            if(board[x][y]=='Q') return false;
+            x++;
+            y--;
+        }
+        return true;
+    }
+    void nQueens(int col, vector<string> board, vector<vector<string>> &ans){
+        if(col==board.size()){
+            ans.push_back(board);
+            return;
+        }
+        for(int row=0; row<board.size(); row++){
+            if(isSafe(row, col, board)){
+                board[row][col]='Q';
+                nQueens(col+1, board, ans);
+                board[row][col]='.';
+            }
+        }
+    }
+    vector<vector<string>> solveNQueens(int n) {
+        vector<vector<string>> ans;
+        vector<string> board(n, string(n, '.'));
+        nQueens(0, board, ans);
+        return ans;
+    }
