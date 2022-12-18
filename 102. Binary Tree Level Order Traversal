@@ -1,0 +1,35 @@
+  vector<vector<int>> levelOrder(TreeNode* root){
+    vector<vector<int>> res;
+    if(root==NULL) return res;
+    vector<pair<int, int>> ans;
+    queue<pair<TreeNode*,int>> q;
+    int lvl=0;
+    q.push({root, lvl});
+    while(!q.empty()){
+        pair<TreeNode*, int> temp=q.front();
+        q.pop();
+        ans.push_back({(temp.first)->val, temp.second});
+        if((temp.first)->left!=NULL){
+            q.push({(temp.first)->left, (temp.second+1)});
+        }
+        if((temp.first)->right!=NULL){
+            q.push({(temp.first)->right, (temp.second+1)});
+        }
+    }
+    int temp=0;
+    vector<int> tp;
+    for(auto i:ans){
+        if(i.second==temp){
+            tp.push_back(i.first);
+        }
+        else{
+            res.push_back(tp);
+            temp=i.second;
+            tp.clear();
+            tp.push_back(i.first);
+        }
+        // cout<<i.first<<" "<<i.second<<endl;
+    }
+    res.push_back(tp);
+    return res;
+  }
