@@ -1,0 +1,59 @@
+//trapping rain water brute force approach
+int maxWaterHold(vector<int> nums){
+    int wHold=0;
+    for(int i=0; i<nums.size(); i++){
+        int lh=0;
+        int rh=0;
+        for(int l=i-1; l>=0; l--){
+            lh=max(lh, nums[l]);
+        }
+        for(int r=i+1; r<nums.size(); r++){
+            rh=max(rh, nums[r]);
+        }
+        int water = min(lh, rh)-nums[i];
+        if(water>0) wHold+=water;
+    }
+    return wHold;
+}
+
+//using prefix and suffix array
+int maxWaterHold(vector<int> height){
+    int prefixArr[height.size()];
+    int suffixArr[height.size()];
+    int maxi=0;
+    int maxi2=0;
+    for(int i=0; i<height.size(); i++){
+        maxi=max(maxi, height[i]);
+        maxi2=max(maxi2, height[height.size()-1-i]);
+        prefixArr[i]=maxi;
+        suffixArr[height.size()-1-i]=maxi2;
+    }
+    int wHold=0;
+    for(int i=0; i<height.size(); i++){
+        int water = min(prefixArr[i], suffixArr[i])-height[i];
+        if(water>0) wHold+=water;
+    }
+    return wHold;
+}
+
+//using two pointer
+int maxWaterHold(vector<int> height){
+    int l=0;
+    int r=height.size()-1;
+    int wHold=0;
+    int lMax=0;
+    int rMax=0;
+    while(l<=r){
+        if(height[l]<=height[r]){
+            if(height[l]>=lMax) lMax=height[l];
+            else wHold+=(lMax-height[l]);
+            l++;
+        }
+        else{
+            if(height[r]>=rMax) rMax=height[r];
+            else wHold+=(rMax-height[r]);
+            r--;
+        }
+    }
+    return wHold;
+}   
