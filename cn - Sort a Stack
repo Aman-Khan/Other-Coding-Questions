@@ -1,0 +1,22 @@
+void insertInOrder(stack<int> &st, int data){
+    if(st.empty() || st.top()<=data){
+        st.push(data);
+        return;
+    }
+
+    int num = st.top();
+    st.pop();
+    insertInOrder(st, data);
+    st.push(num);
+}
+void sortStack(stack<int> &st)
+{
+    if(st.empty()){
+        return;
+    }
+    int data=st.top();
+    st.pop();
+    sortStack(st);
+    insertInOrder(st, data);
+	// Write your code here
+}
