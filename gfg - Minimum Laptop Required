@@ -1,0 +1,17 @@
+link - https://practice.geeksforgeeks.org/problems/af49b143a4ead583e943ca6176fbd7ea55b121ae/1
+
+    int minLaptops(int N, int start[], int end[]) {
+        sort(start, start+N);
+        sort(end, end+N);
+        
+        queue<pair<int, int>> q;
+        q.push({start[0], end[0]});
+        for(int i=1; i<N; i++){
+            auto temp = q.front();
+            if(temp.second<=start[i]){
+                q.pop();
+            }
+            q.push({start[i], end[i]});
+        }
+        return q.size();
+    }
