@@ -1,0 +1,24 @@
+string convert(string s, int numRows) {
+       vector<string> split(numRows);
+
+        int i=0;
+        int n = s.length();
+        while(i<n){
+            int j=0;
+            for(; j<numRows; j++){
+                if(i==n) break;
+                split[j].push_back(s[i++]);
+            }
+            j=0;
+            for(; j<numRows-2; j++){
+                if(i==n) break;
+                split[numRows-2-j].push_back(s[i++]);
+            }
+        }
+        string ans = "";
+        for(auto i:split){
+            ans+=i; 
+        }
+       return ans;
+
+    }
