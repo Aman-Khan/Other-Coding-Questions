@@ -1,0 +1,36 @@
+//Approach
+//Using 2-different color to fill using bfs in visited vector
+// -1 : not visited, 1 - color1, 0 - color2
+//if node is filled with diffent color during bfs that means graph is not bipartite
+
+    bool bfs(queue<pair<int, int>>& q, vector<vector<int>>& graph, vector<int>& visited){
+        while(!q.empty()){
+            int node = q.front().first;
+            int color = q.front().second;
+            
+            q.pop();
+            for(auto i:graph[node]){
+                if(visited[i]==-1){
+                    q.push({i, !color});
+                    visited[i] = !color;
+                }
+                else if(visited[i]==color) return false;
+            }
+        }
+        return true;
+    }
+
+    bool isBipartite(vector<vector<int>>& graph) {
+        int n = graph.size();
+        vector<int> visited(n, -1);
+        queue<pair<int, int>> q;
+
+        for(int i=0; i<n; i++){
+            if(visited[i]==-1){
+                q.push({i, 0});
+                visited[i]=0;
+                if(!bfs(q, graph, visited)) return false;
+            }
+        }
+        return true;
+    }
